@@ -7,6 +7,9 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.junit.Test;
 
+import java.util.List;
+import java.util.Locale;
+
 
 public class CalculatorTests {
 
@@ -16,35 +19,26 @@ public class CalculatorTests {
         CalculatorParser parser = new CalculatorParser(tokens);
         return parser;
     }
-    private static Double calculator(String exp){
+    private static CalculatorInterpreter calculator(String exp){
         CalculatorParser parser = getParserTreeFromExp(exp);
         ParseTree tree = parser.expression();
-        Double query = new CalculatorInterpreter().visit(tree);
-        return query;
+        CalculatorInterpreter interpreter = new CalculatorInterpreter(tree);
+        return interpreter;
     }
-    @Test
-    public void test1(){
-        String exp = "21+2-4*2";
-        System.out.println(exp + " = " + calculator(exp));
+
+    private static void calculaterTest(String exp){
+        System.out.println("[Input ] : " + exp);
+        CalculatorInterpreter interpreter = calculator(exp);
+        interpreter.history().forEach((k,v)-> System.out.println(k + ": " + v));
+        System.out.println("[result] : " + interpreter.result() + "\n");
     }
+
     @Test
-    public void test2(){
-        String exp = "21+(2-4)*2";
-        System.out.println(exp + " = " + calculator(exp));
-    }
-    @Test
-    public void test3(){
-        String exp = "6/2-4";
-        System.out.println(exp + " = " + calculator(exp));
-    }
-    @Test
-    public void test4(){
-        String exp = "5*(2+3)/4";
-        System.out.println(exp + " = " + calculator(exp));
-    }
-    @Test
-    public void test5(){
-        String exp = "5*(2+3)/4 + 5-3*10-(3+5)";
-        System.out.println(exp + " = " + calculator(exp));
+    public void test1() {
+        calculaterTest("21+2-4*2");
+        calculaterTest("21+(2-4)*2");
+        calculaterTest("5*(2+3)/4");
+        calculaterTest("5*(2+3)/4+5-3*10-(3+5)");
+        calculaterTest("5*(2+3)/4+(5-3)*10-(3+5)");
     }
 }
