@@ -4,8 +4,8 @@ import com.senspond.exp.alntlr.CalculatorParser;
 import lombok.Getter;
 import lombok.experimental.Accessors;
 import org.antlr.v4.runtime.tree.ParseTree;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +13,7 @@ import java.util.Map;
 @Getter
 @Accessors(chain = true, fluent = true)
 public class CalculatorInterpreter extends CalculatorBaseVisitor<Double> {
-    private static final Logger log = LoggerFactory.getLogger(CalculatorInterpreter.class);
+//    private static final Logger log = LoggerFactory.getLogger(CalculatorInterpreter.class);
     private int count;
     private Map<Integer,String> history;
     private Double result;

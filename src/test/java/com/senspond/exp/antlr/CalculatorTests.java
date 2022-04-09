@@ -7,10 +7,6 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.junit.Test;
 
-import java.util.List;
-import java.util.Locale;
-
-
 public class CalculatorTests {
 
     private static CalculatorParser getParserTreeFromExp(String exp){
